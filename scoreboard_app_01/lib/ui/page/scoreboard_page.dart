@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboardapp/domain/entity/participant.dart';
-import 'package:scoreboardapp/ui/view_model/participants.dart';
+import 'package:scoreboardapp/ui/view_model/participants_view_model.dart';
 
 class ScoreboardPage extends StatefulWidget {
   @override
@@ -17,8 +17,8 @@ class _ScoreboardPageState extends State<ScoreboardPage> {
         title: Text("Scoreboard"),
       ),
       backgroundColor: Color(0xffFAFAFA),
-      body: Consumer<Participants>(
-        builder: (BuildContext context, Participants value, Widget child) {
+      body: Consumer<ParticipantsViewModel>(
+        builder: (BuildContext context, ParticipantsViewModel value, Widget child) {
           final List<Participant> participants = List<Participant>.from(value.participants);
           participants.sort((a, b) => b.score.compareTo(a.score));
           return ListView.builder(

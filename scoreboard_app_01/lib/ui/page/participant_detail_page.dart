@@ -6,21 +6,26 @@ class ParticipantDetailPage extends StatefulWidget {
     Key key,
     @required this.name,
     @required this.score,
-  }) : super(key: key) {
-    nameController.text = name;
-    scoreController.text = score.toString();
-  }
+  }) : super(key: key);
 
   final String name;
   final int score;
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController scoreController = TextEditingController();
 
   @override
   _ParticipantDetailPageState createState() => _ParticipantDetailPageState();
 }
 
 class _ParticipantDetailPageState extends State<ParticipantDetailPage> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController scoreController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    scoreController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +39,12 @@ class _ParticipantDetailPageState extends State<ParticipantDetailPage> {
           children: <Widget>[
             TextFormField(
               decoration: InputDecoration(labelText: "Name:"),
-              controller: widget.nameController,
               autofocus: true,
+              controller: nameController..text = widget.name,
             ),
             TextFormField(
               decoration: InputDecoration(labelText: "Score:"),
-              controller: widget.scoreController,
+              controller: scoreController..text = widget.score.toString(),
             ),
             SizedBox(
               height: 50,
@@ -52,9 +57,8 @@ class _ParticipantDetailPageState extends State<ParticipantDetailPage> {
                   onPressed: () {
                     Navigator.pop(
                         context,
-                        Participant(widget.nameController.text,
-                            int.parse(widget.scoreController.text)));
-                    widget.nameController.clear();
+                        Participant(nameController.text,
+                            int.parse(scoreController.text)));
                   },
                   child: Text(
                     "Save",
@@ -65,8 +69,7 @@ class _ParticipantDetailPageState extends State<ParticipantDetailPage> {
                   color: Theme.of(context).accentColor,
                   textColor: Colors.white,
                   onPressed: () {
-                    Navigator.pop(context, false);
-                    widget.nameController.clear();
+                    Navigator.pop(context, widget.name);
                   },
                   child: Text("Delete"),
                 ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboardapp/domain/entity/participant.dart';
 import 'package:scoreboardapp/ui/page/participant_detail_page.dart';
-import 'package:scoreboardapp/ui/view_model/participants.dart';
+import 'package:scoreboardapp/ui/view_model/participants_view_model.dart';
 
 class ParticipantsPage extends StatefulWidget {
   ParticipantsPage({Key key}) : super(key: key);
@@ -18,8 +18,8 @@ class _ParticipantsPageState extends State<ParticipantsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<Participants>(
-        builder: (BuildContext context, Participants value, Widget child) {
+    return Consumer<ParticipantsViewModel>(
+        builder: (BuildContext context, ParticipantsViewModel value, Widget child) {
           return Container(
             color: Theme.of(context).primaryColor,
             // Workaround to show floating action button on iOS (tab bar issue)
@@ -54,10 +54,10 @@ class _ParticipantsPageState extends State<ParticipantsPage> {
                                   ),
                                 ),
                               );
-                              if (result is bool && !result) {
-                                value.deleteAt(index);
+                              if (result is String) {
+                                value.delete(Participant(result,1));
                               } else if (result is Participant) {
-                                value.update(index, result);
+                                value.update(result);
                               }
                             },
                           ),
@@ -78,7 +78,7 @@ class _ParticipantsPageState extends State<ParticipantsPage> {
     );
   }
 
-  Future<dynamic> _addParticipantDialog(Participants value) {
+  Future<dynamic> _addParticipantDialog(ParticipantsViewModel value) {
     return showDialog(
       context: context,
       barrierDismissible: true,
