@@ -1,7 +1,6 @@
-import 'package:scoreboardapp/data/data_source/participants_data_source.dart';
 import 'package:scoreboardapp/data/entity/participant_entity.dart';
-import 'package:scoreboardapp/domain/contract/participants_repository.dart';
 import 'package:scoreboardapp/domain/entity/participant.dart';
+import 'package:scoreboardapp/domain/repository/participants_repository.dart';
 
 class ParticipantsRepositoryImpl implements ParticipantsRepository {
   final dataSource = ParticipantsDataSourceImpl();
@@ -20,8 +19,10 @@ class ParticipantsRepositoryImpl implements ParticipantsRepository {
 
   @override
   List<Participant> getParticipants() {
-    return dataSource.getParticipants().map(
-            (entity) => Participant(entity.name, entity.score)).toList();
+    return dataSource
+        .getParticipants()
+        .map<Participant>((entity) => Participant(entity.name, entity.score))
+        .toList();
   }
 
   @override

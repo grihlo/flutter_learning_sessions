@@ -1,4 +1,4 @@
-### Flutter get-together session #2
+### Flutter get-together session #01
 
 **Exercise:** *Improve previously build scoreboard app*
 

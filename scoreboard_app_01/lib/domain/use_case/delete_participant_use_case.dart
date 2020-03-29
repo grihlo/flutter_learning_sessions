@@ -1,8 +1,10 @@
-import 'package:scoreboardapp/data/repository/participants_repository_impl.dart';
 import 'package:scoreboardapp/domain/entity/participant.dart';
+import 'package:scoreboardapp/domain/repository/participants_repository.dart';
 
 class DeleteParticipantUseCase {
-  final repository = ParticipantsRepositoryImpl();
+  DeleteParticipantUseCase(this.repository);
+
+  final ParticipantsRepository repository;
 
   void call(Participant participant) {
     return repository.deleteParticipant(participant);

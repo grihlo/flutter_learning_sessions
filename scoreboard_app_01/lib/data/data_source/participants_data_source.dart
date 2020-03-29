@@ -12,7 +12,9 @@ abstract class ParticipantsDataSource {
 }
 
 class ParticipantsDataSourceImpl implements ParticipantsDataSource {
-  final box = Hive.box("participants");
+  ParticipantsDataSourceImpl(this.box);
+
+  final box;
 
   @override
   List<ParticipantEntity> getParticipants() {
