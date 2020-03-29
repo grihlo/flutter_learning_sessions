@@ -1,4 +1,4 @@
-### Flutter get-together session #1
+### Flutter get-together session #00
 
 **Exercise:** *Build scoreboard app for table tennis*
 
