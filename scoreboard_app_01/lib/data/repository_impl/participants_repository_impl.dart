@@ -3,7 +3,9 @@ import 'package:scoreboardapp/domain/entity/participant.dart';
 import 'package:scoreboardapp/domain/repository/participants_repository.dart';
 
 class ParticipantsRepositoryImpl implements ParticipantsRepository {
-  final dataSource = ParticipantsDataSourceImpl();
+  ParticipantsRepositoryImpl(this.dataSource);
+
+  final dataSource;
 
   @override
   void createParticipant(Participant participant) {
