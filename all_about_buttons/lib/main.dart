@@ -9,11 +9,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'All about buttons 📱',
       theme: ThemeData(
-          //primaryColor: Colors.purple,
-          //accentColor: Colors.red,
-          //primarySwatch: Colors.orange,
-          //buttonColor: Colors.green,
-          ),
+//        primaryColor: Colors.purple,
+//        accentColor: Colors.red,
+//        primarySwatch: Colors.orange,
+//        buttonColor: Colors.green,
+//        buttonTheme: ButtonThemeData(
+//          buttonColor: Colors.green,
+//          shape: RoundedRectangleBorder(
+//            borderRadius: BorderRadius.circular(100),
+//          ),
+//          textTheme: ButtonTextTheme.normal,
+//          minWidth: 200.0,
+//        ),
+      ),
       home: PageView(
         children: <Widget>[
           MaterialButtonsBasicsPage(title: 'Material buttons'),
