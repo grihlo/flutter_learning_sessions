@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -8,13 +9,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'All about buttons 📱',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          //primaryColor: Colors.purple,
+          //accentColor: Colors.red,
+          //primarySwatch: Colors.orange,
+          //buttonColor: Colors.green,
+          ),
       home: PageView(
         children: <Widget>[
           MaterialButtonsBasicsPage(title: 'Material buttons'),
-          MaterialButtonsExtendedPage(title: 'Material button drop down',),
-          MaterialButtonsAdvancedPage(title: 'Material buttons'),
+          MaterialButtonsExtendedPage(title: 'Material button drop down'),
+          MaterialButtonsAdvancedPage(title: 'Material buttons core'),
+          CupertinoButtonsBasicsPage(title: "Cupertino buttons"),
+          FlutterButtonsCorePage(title: "Flutter buttons core"),
+          CustomButtonsPlaygroundPage(title: "Custom buttons playground"),
+          AnimatedButtonsPlaygroundPage(title: "Animated buttons playground"),
         ],
       ),
     );
@@ -70,10 +78,12 @@ class MaterialButtonsExtendedPage extends StatefulWidget {
   final String title;
 
   @override
-  _MaterialButtonsExtendedPageState createState() => _MaterialButtonsExtendedPageState();
+  _MaterialButtonsExtendedPageState createState() =>
+      _MaterialButtonsExtendedPageState();
 }
 
-class _MaterialButtonsExtendedPageState extends State<MaterialButtonsExtendedPage> {
+class _MaterialButtonsExtendedPageState
+    extends State<MaterialButtonsExtendedPage> {
   String dropdownValue = 'DropdownButton1';
   String popMenuValue = 'PopupMenuButton1';
 
@@ -141,7 +151,7 @@ class MaterialButtonsAdvancedPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Semantics
+            // LOOK HERE! -> Semantics
             InkWell(
               onTap: () {},
               child: Text("InkWell"),
@@ -160,6 +170,119 @@ class MaterialButtonsAdvancedPage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CupertinoButtonsBasicsPage extends StatelessWidget {
+  CupertinoButtonsBasicsPage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CupertinoButton(
+              onPressed: () {},
+              child: Text("CupertinoButton"),
+            ),
+            CupertinoButton.filled(
+              onPressed: () {},
+              child: Text("CupertinoButton"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FlutterButtonsCorePage extends StatelessWidget {
+  FlutterButtonsCorePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () => print("Tapped on GestureDetector"),
+              child: Text("GestureDetector"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomButtonsPlaygroundPage extends StatelessWidget {
+  CustomButtonsPlaygroundPage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () => print("Tapped on GestureDetector"),
+              child: Text("DYI"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AnimatedButtonsPlaygroundPage extends StatelessWidget {
+  AnimatedButtonsPlaygroundPage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+              onPressed: () {},
+              child: Text("TODO"),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'TODO',
+        child: Icon(Icons.check),
       ),
     );
   }
