@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 //          textTheme: ButtonTextTheme.normal,
 //          minWidth: 200.0,
 //        ),
-      ),
+          ),
       home: PageView(
         children: <Widget>[
           MaterialButtonsBasicsPage(title: 'Material buttons'),
@@ -52,9 +52,10 @@ class MaterialButtonsBasicsPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            FlatButton(
+            FlatButton.icon(
               onPressed: () {},
-              child: Text("FlatButton"),
+              icon: Icon(Icons.send),
+              label: Text("FlatButton"),
             ),
             RaisedButton(
               onPressed: () {},
@@ -239,16 +240,25 @@ class FlutterButtonsCorePage extends StatelessWidget {
   }
 }
 
-class CustomButtonsPlaygroundPage extends StatelessWidget {
+class CustomButtonsPlaygroundPage extends StatefulWidget {
   CustomButtonsPlaygroundPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
+  _CustomButtonsPlaygroundPageState createState() =>
+      _CustomButtonsPlaygroundPageState();
+}
+
+class _CustomButtonsPlaygroundPageState
+    extends State<CustomButtonsPlaygroundPage> {
+  bool _clicked = false;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
       ),
       body: Center(
         child: Column(
@@ -258,6 +268,30 @@ class CustomButtonsPlaygroundPage extends StatelessWidget {
               onTap: () => print("Tapped on GestureDetector"),
               child: Text("DYI"),
             ),
+            OutlineButton(
+              padding: EdgeInsets.all(20),
+              shape: CircleBorder(),
+              borderSide: BorderSide(color: Colors.red, width: 4),
+              onPressed: () => print("HELLO"),
+              child: Text("WHOOP"),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _clicked = !_clicked;
+                });
+              },
+              child: AnimatedContainer(
+                duration: const Duration(seconds: 2),
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  color: _clicked ? Colors.red : Colors.green,
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Center(child: Text("CLICK ME")),
+              ),
+            ),
           ],
         ),
       ),
@@ -265,25 +299,68 @@ class CustomButtonsPlaygroundPage extends StatelessWidget {
   }
 }
 
-class AnimatedButtonsPlaygroundPage extends StatelessWidget {
+class AnimatedButtonsPlaygroundPage extends StatefulWidget {
   AnimatedButtonsPlaygroundPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
+  _AnimatedButtonsPlaygroundPageState createState() =>
+      _AnimatedButtonsPlaygroundPageState();
+}
+
+class _AnimatedButtonsPlaygroundPageState
+    extends State<AnimatedButtonsPlaygroundPage>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  Animation<double> _rotationAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..addListener(() {
+        setState(() {});
+      });
+    _rotationAnimation =
+        (Tween<double>(begin: 0.0, end: 5)).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.bounceInOut,
+    ));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
-              onPressed: () {},
-              child: Text("TODO"),
-            ),
+              onPressed: () => _controller.forward(),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Transform.rotate(
+                    child: Container(
+                      height: 20,
+                      width: 20,
+                      color: Colors.blue,
+                    ),
+                    angle: _rotationAnimation.value,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text("HELLO"),
+                ],
+              ),
+            )
           ],
         ),
       ),
