@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         children: <Widget>[
           IntroLayoutsPage(title: 'Intro to layouts'),
           AnimatedButtonTaskPage(title: 'Animtead button task'),
-          ResponsiveLayoutPage(title: 'Responsive layout'),
+          AdaptiveLayoutPage(title: 'Adaptive layout'),
           IntroWebPage(title: "Intro to Flutter web"),
           ResponsiveWebPage(title: "Responsive Flutter web"),
         ],
@@ -65,8 +65,8 @@ class AnimatedButtonTaskPage extends StatelessWidget {
   }
 }
 
-class ResponsiveLayoutPage extends StatelessWidget {
-  ResponsiveLayoutPage({Key key, this.title}) : super(key: key);
+class AdaptiveLayoutPage extends StatelessWidget {
+  AdaptiveLayoutPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
